@@ -7,25 +7,75 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6802ECF71DAF58C000279B35 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6802ECF61DAF58C000279B35 /* ChatLogController.swift */; };
 		687DC8461DAB89E200821D76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8451DAB89E200821D76 /* AppDelegate.swift */; };
-		687DC8481DAB89E200821D76 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8471DAB89E200821D76 /* ViewController.swift */; };
+		687DC8481DAB89E200821D76 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8471DAB89E200821D76 /* MessagesController.swift */; };
 		687DC84B1DAB89E200821D76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8491DAB89E200821D76 /* Main.storyboard */; };
 		687DC84D1DAB89E200821D76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 687DC84C1DAB89E200821D76 /* Assets.xcassets */; };
 		687DC8501DAB89E200821D76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 687DC84E1DAB89E200821D76 /* LaunchScreen.storyboard */; };
 		687DC8591DAB8FB000821D76 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8581DAB8FB000821D76 /* LoginController.swift */; };
 		687DC85B1DABE90F00821D76 /* Resistance-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 687DC85A1DABE90F00821D76 /* Resistance-logo.png */; };
+		687DC85D1DABEE3600821D76 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 687DC85C1DABEE3600821D76 /* GoogleService-Info.plist */; };
+		687DC8611DACC13B00821D76 /* pixta_21001367_M.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8601DACC13B00821D76 /* pixta_21001367_M.jpg */; };
+		687DC8631DACC28100821D76 /* new_message_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8621DACC28100821D76 /* new_message_icon@3x.png */; };
+		687DC8651DACC62B00821D76 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8641DACC62B00821D76 /* NewMessageController.swift */; };
+		687DC8681DACCC9300821D76 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8671DACCC9300821D76 /* User.swift */; };
+		687DC86A1DAD117D00821D76 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687DC8691DAD117D00821D76 /* LoginController+handlers.swift */; };
+		687DC8701DAD16C600821D76 /* 28a37ad1-s.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC86B1DAD16C600821D76 /* 28a37ad1-s.jpg */; };
+		687DC8711DAD16C600821D76 /* 230px-Darth_Maul2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC86C1DAD16C600821D76 /* 230px-Darth_Maul2.jpg */; };
+		687DC8721DAD16C600821D76 /* 230px-Han_Solo3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC86D1DAD16C600821D76 /* 230px-Han_Solo3.jpg */; };
+		687DC8731DAD16C600821D76 /* 150907swcrap.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC86E1DAD16C600821D76 /* 150907swcrap.jpg */; };
+		687DC8741DAD16C600821D76 /* Chewbaccaheadshot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC86F1DAD16C600821D76 /* Chewbaccaheadshot.jpg */; };
+		687DC8781DAD16D200821D76 /* c3po.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8751DAD16D200821D76 /* c3po.jpg */; };
+		687DC8791DAD16D200821D76 /* img_kanban.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8761DAD16D200821D76 /* img_kanban.jpg */; };
+		687DC87A1DAD16D200821D76 /* ダースベイダー.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8771DAD16D200821D76 /* ダースベイダー.jpg */; };
+		68EA3A401DAFDD77002B9A21 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA3A3F1DAFDD77002B9A21 /* Message.swift */; };
+		68EA3A431DAFFB59002B9A21 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA3A421DAFFB59002B9A21 /* UserCell.swift */; };
+		68F863471DAD317700BDD051 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F863461DAD317700BDD051 /* Extensions.swift */; };
+		68F8634C1DAF464800BDD051 /* chacha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F863481DAF464800BDD051 /* chacha.jpg */; };
+		68F8634D1DAF464800BDD051 /* hideyosi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F863491DAF464800BDD051 /* hideyosi.jpg */; };
+		68F8634E1DAF464800BDD051 /* houjou.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F8634A1DAF464800BDD051 /* houjou.jpg */; };
+		68F8634F1DAF464800BDD051 /* terajima_susumu_sanadamaru.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F8634B1DAF464800BDD051 /* terajima_susumu_sanadamaru.jpg */; };
+		68F863511DAF464F00BDD051 /* kagekatugazougazou.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F863501DAF464F00BDD051 /* kagekatugazougazou.png */; };
+		7C0B2F6A63AD0E99633C7701 /* Pods_chatSample2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA286D8DA5392CF1ACE8CA /* Pods_chatSample2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56C2CCE754D335264E48BC56 /* Pods-chatSample2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatSample2.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatSample2/Pods-chatSample2.release.xcconfig"; sourceTree = "<group>"; };
+		6802ECF61DAF58C000279B35 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		687DC8421DAB89E200821D76 /* chatSample2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatSample2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		687DC8451DAB89E200821D76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		687DC8471DAB89E200821D76 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		687DC8471DAB89E200821D76 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		687DC84A1DAB89E200821D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		687DC84C1DAB89E200821D76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		687DC84F1DAB89E200821D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		687DC8511DAB89E300821D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		687DC8581DAB8FB000821D76 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		687DC85A1DABE90F00821D76 /* Resistance-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Resistance-logo.png"; sourceTree = "<group>"; };
+		687DC85C1DABEE3600821D76 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		687DC8601DACC13B00821D76 /* pixta_21001367_M.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixta_21001367_M.jpg; sourceTree = "<group>"; };
+		687DC8621DACC28100821D76 /* new_message_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_message_icon@3x.png"; sourceTree = "<group>"; };
+		687DC8641DACC62B00821D76 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		687DC8671DACCC9300821D76 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		687DC8691DAD117D00821D76 /* LoginController+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
+		687DC86B1DAD16C600821D76 /* 28a37ad1-s.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28a37ad1-s.jpg"; sourceTree = "<group>"; };
+		687DC86C1DAD16C600821D76 /* 230px-Darth_Maul2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "230px-Darth_Maul2.jpg"; sourceTree = "<group>"; };
+		687DC86D1DAD16C600821D76 /* 230px-Han_Solo3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "230px-Han_Solo3.jpg"; sourceTree = "<group>"; };
+		687DC86E1DAD16C600821D76 /* 150907swcrap.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 150907swcrap.jpg; sourceTree = "<group>"; };
+		687DC86F1DAD16C600821D76 /* Chewbaccaheadshot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Chewbaccaheadshot.jpg; sourceTree = "<group>"; };
+		687DC8751DAD16D200821D76 /* c3po.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = c3po.jpg; sourceTree = "<group>"; };
+		687DC8761DAD16D200821D76 /* img_kanban.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img_kanban.jpg; sourceTree = "<group>"; };
+		687DC8771DAD16D200821D76 /* ダースベイダー.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ダースベイダー.jpg"; sourceTree = "<group>"; };
+		68EA3A3F1DAFDD77002B9A21 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		68EA3A421DAFFB59002B9A21 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		68F863461DAD317700BDD051 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		68F863481DAF464800BDD051 /* chacha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chacha.jpg; sourceTree = "<group>"; };
+		68F863491DAF464800BDD051 /* hideyosi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hideyosi.jpg; sourceTree = "<group>"; };
+		68F8634A1DAF464800BDD051 /* houjou.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = houjou.jpg; sourceTree = "<group>"; };
+		68F8634B1DAF464800BDD051 /* terajima_susumu_sanadamaru.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = terajima_susumu_sanadamaru.jpg; sourceTree = "<group>"; };
+		68F863501DAF464F00BDD051 /* kagekatugazougazou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kagekatugazougazou.png; sourceTree = "<group>"; };
+		69EA286D8DA5392CF1ACE8CA /* Pods_chatSample2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatSample2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E53646330F0491099DA794DB /* Pods-chatSample2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatSample2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatSample2/Pods-chatSample2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +83,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C0B2F6A63AD0E99633C7701 /* Pods_chatSample2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CA3A81F1749EFE1EDB41216 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E53646330F0491099DA794DB /* Pods-chatSample2.debug.xcconfig */,
+				56C2CCE754D335264E48BC56 /* Pods-chatSample2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		687DC8391DAB89E200821D76 = {
 			isa = PBXGroup;
 			children = (
 				687DC8441DAB89E200821D76 /* chatSample2 */,
 				687DC8431DAB89E200821D76 /* Products */,
+				1CA3A81F1749EFE1EDB41216 /* Pods */,
+				EB25152989A18434695473AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,12 +120,31 @@
 		687DC8441DAB89E200821D76 /* chatSample2 */ = {
 			isa = PBXGroup;
 			children = (
+				68EA3A411DAFFB3F002B9A21 /* view */,
+				68F863451DAD315600BDD051 /* Helpers */,
+				687DC8661DACCC6F00821D76 /* model */,
 				687DC8571DAB8F8E00821D76 /* Controller */,
 				687DC8451DAB89E200821D76 /* AppDelegate.swift */,
 				687DC8491DAB89E200821D76 /* Main.storyboard */,
 				687DC84C1DAB89E200821D76 /* Assets.xcassets */,
 				687DC85A1DABE90F00821D76 /* Resistance-logo.png */,
+				68F863481DAF464800BDD051 /* chacha.jpg */,
+				68F863491DAF464800BDD051 /* hideyosi.jpg */,
+				68F863501DAF464F00BDD051 /* kagekatugazougazou.png */,
+				68F8634A1DAF464800BDD051 /* houjou.jpg */,
+				68F8634B1DAF464800BDD051 /* terajima_susumu_sanadamaru.jpg */,
+				687DC8601DACC13B00821D76 /* pixta_21001367_M.jpg */,
+				687DC86B1DAD16C600821D76 /* 28a37ad1-s.jpg */,
+				687DC86C1DAD16C600821D76 /* 230px-Darth_Maul2.jpg */,
+				687DC86D1DAD16C600821D76 /* 230px-Han_Solo3.jpg */,
+				687DC86E1DAD16C600821D76 /* 150907swcrap.jpg */,
+				687DC86F1DAD16C600821D76 /* Chewbaccaheadshot.jpg */,
+				687DC8751DAD16D200821D76 /* c3po.jpg */,
+				687DC8761DAD16D200821D76 /* img_kanban.jpg */,
+				687DC8771DAD16D200821D76 /* ダースベイダー.jpg */,
+				687DC8621DACC28100821D76 /* new_message_icon@3x.png */,
 				687DC84E1DAB89E200821D76 /* LaunchScreen.storyboard */,
+				687DC85C1DABEE3600821D76 /* GoogleService-Info.plist */,
 				687DC8511DAB89E300821D76 /* Info.plist */,
 			);
 			path = chatSample2;
@@ -72,10 +153,46 @@
 		687DC8571DAB8F8E00821D76 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				687DC8471DAB89E200821D76 /* ViewController.swift */,
+				687DC8471DAB89E200821D76 /* MessagesController.swift */,
 				687DC8581DAB8FB000821D76 /* LoginController.swift */,
+				687DC8641DACC62B00821D76 /* NewMessageController.swift */,
+				687DC8691DAD117D00821D76 /* LoginController+handlers.swift */,
+				6802ECF61DAF58C000279B35 /* ChatLogController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		687DC8661DACCC6F00821D76 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				687DC8671DACCC9300821D76 /* User.swift */,
+				68EA3A3F1DAFDD77002B9A21 /* Message.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		68EA3A411DAFFB3F002B9A21 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				68EA3A421DAFFB59002B9A21 /* UserCell.swift */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		68F863451DAD315600BDD051 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				68F863461DAD317700BDD051 /* Extensions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		EB25152989A18434695473AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				69EA286D8DA5392CF1ACE8CA /* Pods_chatSample2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,9 +202,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 687DC8541DAB89E300821D76 /* Build configuration list for PBXNativeTarget "chatSample2" */;
 			buildPhases = (
+				88479D023327C776047F1697 /* 📦 Check Pods Manifest.lock */,
 				687DC83E1DAB89E200821D76 /* Sources */,
 				687DC83F1DAB89E200821D76 /* Frameworks */,
 				687DC8401DAB89E200821D76 /* Resources */,
+				5B855593C1896CBD4C7801C3 /* 📦 Embed Pods Frameworks */,
+				C28BAB4D602E71BFB0FD493F /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -110,6 +230,7 @@
 				TargetAttributes = {
 					687DC8411DAB89E200821D76 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -136,23 +257,94 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				687DC8701DAD16C600821D76 /* 28a37ad1-s.jpg in Resources */,
+				68F8634C1DAF464800BDD051 /* chacha.jpg in Resources */,
+				68F863511DAF464F00BDD051 /* kagekatugazougazou.png in Resources */,
+				687DC8631DACC28100821D76 /* new_message_icon@3x.png in Resources */,
+				68F8634E1DAF464800BDD051 /* houjou.jpg in Resources */,
+				68F8634D1DAF464800BDD051 /* hideyosi.jpg in Resources */,
+				68F8634F1DAF464800BDD051 /* terajima_susumu_sanadamaru.jpg in Resources */,
 				687DC8501DAB89E200821D76 /* LaunchScreen.storyboard in Resources */,
+				687DC8781DAD16D200821D76 /* c3po.jpg in Resources */,
+				687DC8731DAD16C600821D76 /* 150907swcrap.jpg in Resources */,
 				687DC85B1DABE90F00821D76 /* Resistance-logo.png in Resources */,
+				687DC8611DACC13B00821D76 /* pixta_21001367_M.jpg in Resources */,
+				687DC85D1DABEE3600821D76 /* GoogleService-Info.plist in Resources */,
 				687DC84D1DAB89E200821D76 /* Assets.xcassets in Resources */,
+				687DC87A1DAD16D200821D76 /* ダースベイダー.jpg in Resources */,
 				687DC84B1DAB89E200821D76 /* Main.storyboard in Resources */,
+				687DC8741DAD16C600821D76 /* Chewbaccaheadshot.jpg in Resources */,
+				687DC8721DAD16C600821D76 /* 230px-Han_Solo3.jpg in Resources */,
+				687DC8791DAD16D200821D76 /* img_kanban.jpg in Resources */,
+				687DC8711DAD16C600821D76 /* 230px-Darth_Maul2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B855593C1896CBD4C7801C3 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatSample2/Pods-chatSample2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88479D023327C776047F1697 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C28BAB4D602E71BFB0FD493F /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatSample2/Pods-chatSample2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		687DC83E1DAB89E200821D76 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				687DC8481DAB89E200821D76 /* ViewController.swift in Sources */,
+				6802ECF71DAF58C000279B35 /* ChatLogController.swift in Sources */,
+				687DC8651DACC62B00821D76 /* NewMessageController.swift in Sources */,
+				687DC8481DAB89E200821D76 /* MessagesController.swift in Sources */,
+				68EA3A401DAFDD77002B9A21 /* Message.swift in Sources */,
+				687DC86A1DAD117D00821D76 /* LoginController+handlers.swift in Sources */,
 				687DC8591DAB8FB000821D76 /* LoginController.swift in Sources */,
+				687DC8681DACCC9300821D76 /* User.swift in Sources */,
 				687DC8461DAB89E200821D76 /* AppDelegate.swift in Sources */,
+				68EA3A431DAFFB59002B9A21 /* UserCell.swift in Sources */,
+				68F863471DAD317700BDD051 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,23 +455,29 @@
 		};
 		687DC8551DAB89E300821D76 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E53646330F0491099DA794DB /* Pods-chatSample2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = chatSample2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroto.chatSample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		687DC8561DAB89E300821D76 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 56C2CCE754D335264E48BC56 /* Pods-chatSample2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = chatSample2/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hiroto.chatSample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -302,6 +500,7 @@
 				687DC8561DAB89E300821D76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
