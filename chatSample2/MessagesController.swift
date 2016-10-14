@@ -32,6 +32,9 @@ class MessagesController: UITableViewController {
 	
 	
 	var messages = [Message]()
+	var messageDictionary = [String: Message]()
+	
+	
 	
 //cellの動的なデータ変更の処理。セルの数とセルの内容を決める。---------------------------------------------------------------------------
 
@@ -41,32 +44,12 @@ class MessagesController: UITableViewController {
 	
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//		let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cellId")
 		
 		//as! カスタムクラス　で　セルに再利用するカスタムクラスを指定する
 		let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserCell
 		
 		let message = messages[indexPath.row]
-		
-		if let toId = message.toId {
-			let ref = FIRDatabase.database().reference().child("users").child(toId)
-			ref .observeEventType(.Value, withBlock: { (snapshot) in
-				
-				if let dictionary = snapshot.value as? [String: AnyObject]{
-					
-					cell.textLabel?.text = dictionary["name"] as? String
-					
-					if let profileImageUrl = dictionary["profileImageUrl"] as? String{
-						
-						cell.profileImageView.loadImageUsingCacheWithUrlString(profileImageUrl)
-					}
-				}
-				
-			}, withCancelBlock: nil)
-		}
-		
-		cell.textLabel?.text = message.toId
-		cell.detailTextLabel?.text = message.text
+		cell.message = message
 		
 		return cell
 	}
@@ -88,7 +71,19 @@ class MessagesController: UITableViewController {
 			if let dictionary = snapshot.value as? [String: AnyObject]{
 				let message = Message()
 				message.setValuesForKeysWithDictionary(dictionary)
-				self.messages.append(message)
+				
+//				self.messages.append(message)
+				
+				if let toId = message.toId {
+					self.messageDictionary[toId] = message
+					
+					self.messages = Array(self.messageDictionary.values)
+					
+					self.messages.sortInPlace({ (message1, message2) -> Bool in
+						return message1.timestamp?.intValue > message2.timestamp?.intValue
+					})
+				}
+				
 				print(message.text)
 				
 				dispatch_async(dispatch_get_main_queue(), {
