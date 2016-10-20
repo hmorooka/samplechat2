@@ -1,18 +1,22 @@
 //
 //  Message.swift
-//  chatSample2
+//  gameofchats
 //
-//  Created by 諸岡裕人 on 2016/10/14.
-//  Copyright © 2016年 hiroto.morooka. All rights reserved.
+//  Created by Brian Voong on 7/7/16.
+//  Copyright © 2016 letsbuildthatapp. All rights reserved.
 //
 
 import UIKit
+import Firebase
 
 class Message: NSObject {
- 
+	
 	var fromId: String?
 	var text: String?
 	var timestamp: NSNumber?
 	var toId: String?
 	
+	func chatPartnerId() -> String? {
+		return fromId == FIRAuth.auth()?.currentUser?.uid ? toId : fromId
+	}
 }

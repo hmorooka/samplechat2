@@ -1,23 +1,22 @@
 //
 //  ViewController.swift
-//  chatSample2
+//  gameofchats
 //
-//  Created by 諸岡裕人 on 2016/10/10.
-//  Copyright © 2016年 hiroto.morooka. All rights reserved.
+//  Created by Brian Voong on 6/24/16.
+//  Copyright © 2016 letsbuildthatapp. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
 class MessagesController: UITableViewController {
-
+	
 	let cellId = "cellId"
 	
-	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
 		
 		let image = UIImage(named: "new_message_icon")
 		navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .Plain, target: self, action: #selector(handleNewMessage))
@@ -27,25 +26,85 @@ class MessagesController: UITableViewController {
 		//カスタム（セル）クラスを使うときの作法
 		tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
 		
-		observeMessages()
-    }
-	
+		//        observeMessages()
+	}
 	
 	var messages = [Message]()
-	var messageDictionary = [String: Message]()
+	var messagesDictionary = [String: Message]()
+	
+	func observeUserMessages() {
+		guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+			return
+		}
+		
+		let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
+		ref.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+			
+			let messageId = snapshot.key
+			let messagesReference = FIRDatabase.database().reference().child("messages").child(messageId)
+			
+			messagesReference.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+				
+				if let dictionary = snapshot.value as? [String: AnyObject] {
+					let message = Message()
+					message.setValuesForKeysWithDictionary(dictionary)
+					
+					if let chatPartnerId = message.chatPartnerId() {
+						self.messagesDictionary[chatPartnerId] = message
+						
+						self.messages = Array(self.messagesDictionary.values)
+						self.messages.sortInPlace({ (message1, message2) -> Bool in
+							
+							return message1.timestamp?.intValue > message2.timestamp?.intValue
+						})
+					}
+					
+					//this will crash because of background thread, so lets call this on dispatch_async main thread
+					dispatch_async(dispatch_get_main_queue(), {
+						self.tableView.reloadData()
+					})
+				}
+				
+				}, withCancelBlock: nil)
+			
+			}, withCancelBlock: nil)
+	}
 	
 	
+	//メッセージが追加されたらデータベースからsnapshotでテキスト抽出して配列に入れる--------------------------------------------------------------
+	func observeMessages() {
+		let ref = FIRDatabase.database().reference().child("messages")
+		ref.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+			
+			if let dictionary = snapshot.value as? [String: AnyObject] {
+				let message = Message()
+				message.setValuesForKeysWithDictionary(dictionary)
+				
+				if let chatPartnerId = message.chatPartnerId() {
+					self.messagesDictionary[chatPartnerId] = message
+					
+					self.messages = Array(self.messagesDictionary.values)
+					self.messages.sortInPlace({ (message1, message2) -> Bool in
+						
+						return message1.timestamp?.intValue > message2.timestamp?.intValue
+					})
+				}
+				
+				//this will crash because of background thread, so lets call this on dispatch_async main thread
+				dispatch_async(dispatch_get_main_queue(), {
+					self.tableView.reloadData()
+				})
+			}
+			
+			}, withCancelBlock: nil)
+	}
 	
-//cellの動的なデータ変更の処理。セルの数とセルの内容を決める。---------------------------------------------------------------------------
-
+	//cellの動的なデータ変更の処理。セルの数とセルの内容を決める。--------------------------------------------------------------
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return messages.count
 	}
 	
-	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		
-		//as! カスタムクラス　で　セルに再利用するカスタムクラスを指定する
 		let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserCell
 		
 		let message = messages[indexPath.row]
@@ -54,58 +113,44 @@ class MessagesController: UITableViewController {
 		return cell
 	}
 	
-	
 	//セルの高さを変える処理
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		return 72
 	}
 	
 	
-//メッセージが追加されたらデータベースからsnapshotでテキスト抽出して配列に入れる---------------------------------------------------------------------------
-	
-	func observeMessages(){
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		let message = messages[indexPath.row]
 		
-		let ref = FIRDatabase.database().reference().child("messages")
-		ref.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+		guard let chatPartnerId = message.chatPartnerId() else {
+			return
+		}
 		
-			if let dictionary = snapshot.value as? [String: AnyObject]{
-				let message = Message()
-				message.setValuesForKeysWithDictionary(dictionary)
-				
-//				self.messages.append(message)
-				
-				if let toId = message.toId {
-					self.messageDictionary[toId] = message
-					
-					self.messages = Array(self.messageDictionary.values)
-					
-					self.messages.sortInPlace({ (message1, message2) -> Bool in
-						return message1.timestamp?.intValue > message2.timestamp?.intValue
-					})
-				}
-				
-				print(message.text)
-				
-				dispatch_async(dispatch_get_main_queue(), {
-					self.tableView.reloadData()
-				})
+		let ref = FIRDatabase.database().reference().child("users").child(chatPartnerId)
+		ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+			guard let dictionary = snapshot.value as? [String: AnyObject] else {
+				return
 			}
-		}, withCancelBlock: nil)
+			
+			let user = User()
+			user.id = chatPartnerId
+			user.setValuesForKeysWithDictionary(dictionary)
+			self.showChatControllerForUser(user)
+			
+			}, withCancelBlock: nil)
 	}
-
-//新規チャット開始画面への移行--------------------------------------------------------------------------------------
-	func handleNewMessage(){
+	
+	//新規チャット開始画面への移行NewMessageControllerへ-----------------------------------------------------------------------
+	func handleNewMessage() {
 		let newMessageController = NewMessageController()
 		newMessageController.messagesController = self
 		let navController = UINavigationController(rootViewController: newMessageController)
 		presentViewController(navController, animated: true, completion: nil)
 	}
 	
-
 	//ログインしていたらnavbarに名前を表示する/performSelector→ちょっと動作を遅らせて実行したいとかで使う withObjectはhandlelogoutの引数にあたる
 	//でも、dispatch_afterを使うほうがいいみたい（ios8から廃止になったらしい）
-	func checkIfUserIsLoggedIn(){
-		//user is not logged in
+	func checkIfUserIsLoggedIn() {
 		if FIRAuth.auth()?.currentUser?.uid == nil {
 			performSelector(#selector(handleLogout), withObject: nil, afterDelay: 0)
 		} else {
@@ -113,33 +158,37 @@ class MessagesController: UITableViewController {
 		}
 	}
 	
-	
 	//ユーザー名をnavbarに表示するメソッド
-	func fetchUserAndSetupNavBarTitle(){
+	func fetchUserAndSetupNavBarTitle() {
 		
 		//何かしらの理由でuidがnilの可能性がある。なるべく!のアンラップは使わないほうがいい？ってこと。→下のuid!の！が外れる
-		guard let uid = FIRAuth.auth()?.currentUser?.uid else{
+		guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+			//for some reason uid = nil
 			return
 		}
+		
 		FIRDatabase.database().reference().child("users").child(uid).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
 			
-			print(snapshot)
 			if let dictionary = snapshot.value as? [String: AnyObject] {
-				
-				self.navigationItem.title = dictionary["name"] as? String
+				//                self.navigationItem.title = dictionary["name"] as? String
 				
 				//User()はUser.swiftに定義されているオブジェクトで、name,email,profileImageの変数を持っている
 				let user = User()
 				user.setValuesForKeysWithDictionary(dictionary)
-				//ここでメソッド実行
 				self.setupNavBarWithUser(user)
-				
 			}
+			
 			}, withCancelBlock: nil)
-		}
+	}
 	
 	//navbarに名前とprofileimageを実装する
 	func setupNavBarWithUser(user: User) {
+		messages.removeAll()
+		messagesDictionary.removeAll()
+		tableView.reloadData()
+		
+		observeUserMessages()
+		
 		let titleView = UIView()
 		titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
 		//        titleView.backgroundColor = UIColor.redColor()
@@ -182,22 +231,19 @@ class MessagesController: UITableViewController {
 		
 		self.navigationItem.titleView = titleView
 		
-//		titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
-	
+		//        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showChatController)))
 	}
 	
 	
-//チャット画面に移行する処理--------------------------------------------------------------------------------------
+	//チャット画面に移行する処理--------------------------------------------------------------------------------------
 	
 	func showChatControllerForUser(user: User) {
-		let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewLayout())
+		let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
 		chatLogController.user = user
 		navigationController?.pushViewController(chatLogController, animated: true)
-		
 	}
 	
-	
-	func handleLogout(){
+	func handleLogout() {
 		
 		do {
 			try FIRAuth.auth()?.signOut()
@@ -209,6 +255,6 @@ class MessagesController: UITableViewController {
 		loginController.messagesController = self
 		presentViewController(loginController, animated: true, completion: nil)
 	}
-
+	
 }
 

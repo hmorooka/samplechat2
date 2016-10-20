@@ -1,17 +1,16 @@
 //
 //  User.swift
-//  chatSample2
+//  gameofchats
 //
-//  Created by 諸岡裕人 on 2016/10/11.
-//  Copyright © 2016年 hiroto.morooka. All rights reserved.
+//  Created by Brian Voong on 6/29/16.
+//  Copyright © 2016 letsbuildthatapp. All rights reserved.
 //
 
 import UIKit
 
 class User: NSObject {
+	var id: String?
 	var name: String?
 	var email: String?
 	var profileImageUrl: String?
-	var id: String?
-
 }

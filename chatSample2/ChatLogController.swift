@@ -1,16 +1,59 @@
 //
 //  ChatLogController.swift
-//  chatSample2
+//  gameofchats
 //
-//  Created by 諸岡裕人 on 2016/10/13.
-//  Copyright © 2016年 hiroto.morooka. All rights reserved.
+//  Created by Brian Voong on 7/7/16.
+//  Copyright © 2016 letsbuildthatapp. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class ChatLogController: UICollectionViewController, UITextFieldDelegate{
+class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
 	
+	//MessagesController.swiftから userの中にユーザー情報の値をuserに渡している。ここで器を作って受け取っている？
+	var user: User? {
+		didSet {
+			navigationItem.title = user?.name
+			
+			observeMessages()
+		}
+	}
+	
+	//Message.swiftの配列？
+	var messages = [Message]()
+	
+	func observeMessages() {
+		guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+			return
+		}
+		
+		let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid)
+		userMessagesRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+			
+			let messageId = snapshot.key
+			let messagesRef = FIRDatabase.database().reference().child("messages").child(messageId)
+			messagesRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+				
+				guard let dictionary = snapshot.value as? [String: AnyObject] else {
+					return
+				}
+				
+				let message = Message()
+				//potential of crashing if keys don't match
+				message.setValuesForKeysWithDictionary(dictionary)
+				
+				if message.chatPartnerId() == self.user?.id {
+					self.messages.append(message)
+					dispatch_async(dispatch_get_main_queue(), {
+						self.collectionView?.reloadData()
+					})
+				}
+				
+				}, withCancelBlock: nil)
+			
+			}, withCancelBlock: nil)
+	}
 	
 	lazy var inputTextField: UITextField = {
 		let textField = UITextField()
@@ -20,30 +63,70 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate{
 		return textField
 	}()
 	
-	
-	var user: User? {
-		didSet {
-			navigationItem.title = user?.name
-		}
-	}
+	let cellId = "cellId"
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		collectionView?.contentInset = UIEdgeInsetsMake(8, 0, 58, 0)
+		collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 50, 0)
+		collectionView?.alwaysBounceVertical = true
 		collectionView?.backgroundColor = UIColor.whiteColor()
+		collectionView?.registerClass(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
 		
 		setupInputComponents()
 	}
 	
+	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return messages.count
+	}
+	
+	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellId, forIndexPath: indexPath) as! ChatMessageCell
+		
+		let message = messages[indexPath.item]
+		cell.textView.text = message.text
+		
+		cell.bubbleWidthAnchor?.constant = estimateFrameForText(message.text!).width + 32
+		
+		return cell
+	}
+	
+	override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+		collectionView?.collectionViewLayout.invalidateLayout()
+	}
+	
+	//バブル、テキストの高さを決める処理--------------------------------------------------
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		
+		var height: CGFloat = 80
+		
+		if let text = messages[indexPath.row].text {
+			height = estimateFrameForText(text).height + 20
+		}
+		
+		return CGSize(width: view.frame.width, height: height)
+	}
+	
+	//何をやっているか復習必要
+	private func estimateFrameForText(text: String) -> CGRect {
+		let size = CGSize(width: 200, height: 1000)
+		let options = NSStringDrawingOptions.UsesFontLeading.union(.UsesLineFragmentOrigin)
+		return NSString(string: text).boundingRectWithSize(size, options: options, attributes: [NSFontAttributeName: UIFont.systemFontOfSize(16)], context: nil)
+	}
+	
+	//終　バブル、テキストの高さを決める処理--------------------------------------------------
+	
 	func setupInputComponents() {
 		let containerView = UIView()
+		containerView.backgroundColor = UIColor.whiteColor()
 		containerView.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.addSubview(containerView)
 		
 		//ios9 constraint anchors
-		//neet x,y,width,height
-		
+		//x,y,w,h
 		containerView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
 		containerView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
 		containerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor).active = true
@@ -54,8 +137,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate{
 		sendButton.translatesAutoresizingMaskIntoConstraints = false
 		sendButton.addTarget(self, action: #selector(handleSend), forControlEvents: .TouchUpInside)
 		containerView.addSubview(sendButton)
-		
-		//need x,y,w,h
+		//x,y,w,h
 		sendButton.rightAnchor.constraintEqualToAnchor(containerView.rightAnchor).active = true
 		sendButton.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
 		sendButton.widthAnchor.constraintEqualToConstant(80).active = true
@@ -65,7 +147,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate{
 		//x,y,w,h
 		inputTextField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor, constant: 8).active = true
 		inputTextField.centerYAnchor.constraintEqualToAnchor(containerView.centerYAnchor).active = true
-//		inputTextField.widthAnchor.constraintEqualToConstant(100).active = true
 		inputTextField.rightAnchor.constraintEqualToAnchor(sendButton.leftAnchor).active = true
 		inputTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor).active = true
 		
@@ -78,22 +159,32 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate{
 		separatorLineView.topAnchor.constraintEqualToAnchor(containerView.topAnchor).active = true
 		separatorLineView.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor).active = true
 		separatorLineView.heightAnchor.constraintEqualToConstant(1).active = true
-		
 	}
 	
-	
-//メッセージを送ってデータベースに登録する処理--------------------------------------------------------------------------------------
-	
-	//toIdを取るのに
-	func handleSend(){
+	func handleSend() {
 		let ref = FIRDatabase.database().reference().child("messages")
 		let childRef = ref.childByAutoId()
+		//is it there best thing to include the name inside of the message node
 		let toId = user!.id!
-		print(user!.id!)
 		let fromId = FIRAuth.auth()!.currentUser!.uid
 		let timestamp: NSNumber = Int(NSDate().timeIntervalSince1970)
 		let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp]
-		childRef.updateChildValues(values)
+		//        childRef.updateChildValues(values)
+		
+		childRef.updateChildValues(values) { (error, ref) in
+			if error != nil {
+				print(error)
+				return
+			}
+			
+			let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId)
+			
+			let messageId = childRef.key
+			userMessagesRef.updateChildValues([messageId: 1])
+			
+			let recipientUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId)
+			recipientUserMessagesRef.updateChildValues([messageId: 1])
+		}
 	}
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -101,20 +192,3 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate{
 		return true
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

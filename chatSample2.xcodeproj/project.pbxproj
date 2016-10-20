@@ -31,6 +31,7 @@
 		687DC87A1DAD16D200821D76 /* ダースベイダー.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 687DC8771DAD16D200821D76 /* ダースベイダー.jpg */; };
 		68EA3A401DAFDD77002B9A21 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA3A3F1DAFDD77002B9A21 /* Message.swift */; };
 		68EA3A431DAFFB59002B9A21 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA3A421DAFFB59002B9A21 /* UserCell.swift */; };
+		68F6C0961DB5C7D800DCDBBB /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F6C0951DB5C7D800DCDBBB /* ChatMessageCell.swift */; };
 		68F863471DAD317700BDD051 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F863461DAD317700BDD051 /* Extensions.swift */; };
 		68F8634C1DAF464800BDD051 /* chacha.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F863481DAF464800BDD051 /* chacha.jpg */; };
 		68F8634D1DAF464800BDD051 /* hideyosi.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68F863491DAF464800BDD051 /* hideyosi.jpg */; };
@@ -68,6 +69,7 @@
 		687DC8771DAD16D200821D76 /* ダースベイダー.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ダースベイダー.jpg"; sourceTree = "<group>"; };
 		68EA3A3F1DAFDD77002B9A21 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		68EA3A421DAFFB59002B9A21 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		68F6C0951DB5C7D800DCDBBB /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		68F863461DAD317700BDD051 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		68F863481DAF464800BDD051 /* chacha.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chacha.jpg; sourceTree = "<group>"; };
 		68F863491DAF464800BDD051 /* hideyosi.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hideyosi.jpg; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				68EA3A421DAFFB59002B9A21 /* UserCell.swift */,
+				68F6C0951DB5C7D800DCDBBB /* ChatMessageCell.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				687DC86A1DAD117D00821D76 /* LoginController+handlers.swift in Sources */,
 				687DC8591DAB8FB000821D76 /* LoginController.swift in Sources */,
 				687DC8681DACCC9300821D76 /* User.swift in Sources */,
+				68F6C0961DB5C7D800DCDBBB /* ChatMessageCell.swift in Sources */,
 				687DC8461DAB89E200821D76 /* AppDelegate.swift in Sources */,
 				68EA3A431DAFFB59002B9A21 /* UserCell.swift in Sources */,
 				68F863471DAD317700BDD051 /* Extensions.swift in Sources */,
